@@ -39,6 +39,7 @@ ul {
 
 .red {
     background-color: red;
+}
 .status{
   display: flex;
   flex-direction: row;
