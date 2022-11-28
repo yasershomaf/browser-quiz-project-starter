@@ -1,15 +1,25 @@
-.centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+*{margin: 0;
+padding: 0;
+box-sizing: border-box;}
+.container {
+    display: flex;
     text-align: center;
+    justify-content: center;
+    max-width: 100%;
+    height: 100vh;
+    border: solid 5px red;
 }
 
-.scrollable {
-    height: auto;
-    max-height: 80vh;
-    overflow: auto;
+.centered{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  border: solid 5px black;
+}
+
+.questionElement{
+  border: solid 5px green;
 }
 
 ul {
@@ -18,6 +28,7 @@ ul {
     flex-wrap: wrap;
     width: 320px;
     justify-content: space-between;
+    border: solid 5px blue;
 }
 
 .quiz-answer {
@@ -40,12 +51,12 @@ ul {
 .red {
     background-color: red;
 }
-.status{
+/* .status{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content:space-between;
-}
+} */
 
 .status h1{
  color: red;
