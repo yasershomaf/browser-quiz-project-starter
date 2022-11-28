@@ -78,15 +78,20 @@ function checkAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const answersListElement = this.parentElement.children;
   if (this.textContent[5] === currentQuestion.correct) {
+    // If selected one is correct: make it green and add +1 to correct answers
     this.classList.add('green');
+    setQuestionRecord('correct', quizData.currentQuestionIndex);
   } else {
     this.classList.add('red');
+
+    // After wrong option selected this will show right option
     for (const answer of answersListElement) {
       if (answer.textContent[5] === currentQuestion.correct) {
         answer.classList.add('green');
       }
     }
   }
+  // to make that function one use only, we remove it for every item after use
   for (const answer of answersListElement) {
     answer.removeEventListener('click', checkAnswer);
   }

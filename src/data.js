@@ -10,48 +10,229 @@
 */
 
 export const quizData = {
-    currentQuestionIndex: 0,
-    // the questions in the quiz
-    questions: [{
-            text: 'What are the different ways to declare a JS variable?',
-            answers: {
-                a: 'constant, let, variable',
-                b: 'var, const, let, function',
-                c: 'var, let, const',
-                d: 'can tell the difference between arrays and objects',
-            },
-            correct: 'c',
-            selected: null,
-            links: [{
-                    text: 'javascript.info',
-                    href: 'https://javascript.info/variables',
-                },
-                {
-                    text: 'Tyler McGinnis',
-                    href: 'https://ui.dev/var-let-const/',
-                },
-            ],
+  currentQuestionIndex: 0,
+
+  questions: [
+    // 1. Question
+    {
+      text: 'What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
         },
         {
-            text: 'What does `typeof` do?',
-            answers: {
-                a: 'changes the type of a primitive value',
-                b: 'returns a string describing the type of a value',
-                c: 'determines if a value is primitive',
-                d: 'can tell the difference between arrays and objects',
-            },
-            correct: 'b',
-            selected: null,
-            links: [{
-                    text: 'javascript.info',
-                    href: 'https://javascript.info/types#type-typeof',
-                },
-                {
-                    text: 'MDN',
-                    href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
-                },
-            ],
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
         },
-        // Add more questions here
-    ],
+      ],
+    },
+    // 2. Question
+    {
+      text: 'What does `typeof` do?',
+      answers: {
+        a: 'changes the type of a primitive value',
+        b: 'returns a string describing the type of a value',
+        c: 'determines if a value is primitive',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'b',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/types#type-typeof',
+        },
+        {
+          text: 'MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    // 3. Question
+    {
+      text: 'What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
+        },
+      ],
+    },
+    // 4. Question
+    {
+      text: 'What does `typeof` do?',
+      answers: {
+        a: 'changes the type of a primitive value',
+        b: 'returns a string describing the type of a value',
+        c: 'determines if a value is primitive',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'b',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/types#type-typeof',
+        },
+        {
+          text: 'MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    // 5. Question
+    {
+      text: 'What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
+        },
+      ],
+    },
+    // 6. Question
+    {
+      text: 'What does `typeof` do?',
+      answers: {
+        a: 'changes the type of a primitive value',
+        b: 'returns a string describing the type of a value',
+        c: 'determines if a value is primitive',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'b',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/types#type-typeof',
+        },
+        {
+          text: 'MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    // 7. Question
+    {
+      text: 'What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
+        },
+      ],
+    },
+    // 8. Question
+    {
+      text: 'What does `typeof` do?',
+      answers: {
+        a: 'changes the type of a primitive value',
+        b: 'returns a string describing the type of a value',
+        c: 'determines if a value is primitive',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'b',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/types#type-typeof',
+        },
+        {
+          text: 'MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    // 9. Question
+    {
+      text: 'What are the different ways to declare a JS variable?',
+      answers: {
+        a: 'constant, let, variable',
+        b: 'var, const, let, function',
+        c: 'var, let, const',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'c',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/variables',
+        },
+        {
+          text: 'Tyler McGinnis',
+          href: 'https://ui.dev/var-let-const/',
+        },
+      ],
+    },
+    // 10. Question
+    {
+      text: 'What does `typeof` do?',
+      answers: {
+        a: 'changes the type of a primitive value',
+        b: 'returns a string describing the type of a value',
+        c: 'determines if a value is primitive',
+        d: 'can tell the difference between arrays and objects',
+      },
+      correct: 'b',
+      selected: null,
+      links: [
+        {
+          text: 'javascript.info',
+          href: 'https://javascript.info/types#type-typeof',
+        },
+        {
+          text: 'MDN',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+        },
+      ],
+    },
+    // Add more questions here
+  ],
 };
