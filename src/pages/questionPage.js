@@ -26,14 +26,16 @@ export const initQuestionPage = () => {
   const questionElement = createQuestionElement(currentQuestion.text);
   userInterface.appendChild(questionElement);
 
+  //For creating answer List
   const answersListElement = document.getElementById(ANSWERS_LIST_ID);
-  console.log(answersListElement);
 
   for (const [key, answerText] of Object.entries(currentQuestion.answers)) {
-    const answerElement = createAnswerElement(key, answerText);
-    answerElement.addEventListener('click', checkAnswer);
-    answersListElement.appendChild(answerElement);
+    const answerElement = createAnswerElement(key, answerText); //answerElement holds, key and answerText values
+    answerElement.addEventListener('click', checkAnswer); //click listener added to the answerElement
+    answersListElement.appendChild(answerElement); //answerElement added in answersListElement
   }
+
+  //To decide which buttons to show depending on the index of question
   if (quizData.currentQuestionIndex === 0) {
     document
       .getElementById(NEXT_QUESTION_BUTTON_ID)
@@ -58,18 +60,20 @@ export const initQuestionPage = () => {
     .addEventListener('click', showAnswer);
 };
 
+//For moving between questions
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-  setQuestionRecord('', quizData.currentQuestionIndex + 1);
+  setQuestionRecord('', quizData.currentQuestionIndex);
   initQuestionPage();
 };
 
 const prevQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex - 1;
-
+  setQuestionRecord('', quizData.currentQuestionIndex);
   initQuestionPage();
 };
 
+//For checking answers
 function checkAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const answersListElement = this.parentElement.children;

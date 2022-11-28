@@ -16,7 +16,7 @@ export const initWelcomePage = () => {
 };
 
 const startQuiz = () => {
-  setQuestionRecord('reset', 1); //To reset Local Storage of question records.
+  setQuestionRecord('reset', 0); //To reset Local Storage of question records.
   // Funny thing is we use Local Storage against refreshing page. But with refreshing page we manually reset with this
   // Otherwise correct answer numbers pumping up with every click.
   // Need to find solution to start from that(when page refreshed) question when page refreshed to solve this.
