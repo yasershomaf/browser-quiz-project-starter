@@ -20,6 +20,6 @@ const startQuiz = () => {
   // Funny thing is we use Local Storage against refreshing page. But with refreshing page we manually reset with this
   // Otherwise correct answer numbers pumping up with every click.
   // Need to find solution to start from that(when page refreshed) question when page refreshed to solve this.
-  // or ignore already answered question when starting from beginning. 
+  // or ignore already answered question when starting from beginning.
   initQuestionPage();
 };
