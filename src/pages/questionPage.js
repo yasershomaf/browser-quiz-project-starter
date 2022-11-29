@@ -12,7 +12,6 @@ import { quizData } from '../data.js';
 import { getQuestionRecord } from '../questionsRecord.js';
 import { setQuestionRecord } from '../questionsRecord.js';
 import { sumCorrectAnswers } from '../questionsRecord.js';
-import { lastQuestion } from '../questionsRecord.js';
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -21,14 +20,11 @@ export const initQuestionPage = () => {
   //For status information
   // We use getQuestionRecord function and take values as object.
   const currentQuestionNumber = quizData.currentQuestionIndex;
-  const lastQuestionHolder = lastQuestion();
   const sumCorrect = sumCorrectAnswers();
-  const statusElement = createStatusElement(
-    currentQuestionNumber,
-    sumCorrect,
-    lastQuestionHolder
-  ); // Send that object to views for prepared as html element
-  userInterface.appendChild(statusElement); // Put that element in page
+  const statusElement = createStatusElement(currentQuestionNumber, sumCorrect); // Send that object to views for prepared as html element
+  userInterface.appendChild(statusElement);
+
+  // Put that element in page
 
   //For Questions
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
@@ -86,7 +82,9 @@ function checkAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const answersListElement = this.parentElement.children;
   setQuestionRecord(this.textContent[5], quizData.currentQuestionIndex);
+
   if (this.textContent[5] === currentQuestion.correct) {
+    console.log(this.textContent[2]);
     // If selected one is correct: make it green and add +1 to correct answers
     this.classList.add('green');
   } else {
@@ -98,10 +96,12 @@ function checkAnswer() {
       }
     }
   }
+
   // to make that function one use only, we remove it for every item after use
   for (const answer of answersListElement) {
     answer.removeEventListener('click', checkAnswer);
   }
+  // initQuestionPage();
 }
 
 function showAnswer() {

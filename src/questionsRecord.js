@@ -5,27 +5,26 @@ for (let index = 0; index < quizData.questions.length; index++) {
   answerList.push({ questionNumber: index + 1, answer: '' });
 }
 
-function lastQuestion() {
-  let updatedAnswerList = Object.values(getQuestionRecord())[0];
-  var lastOne = 0;
-  for (let index = 0; index < updatedAnswerList.length; index++) {
-    if (updatedAnswerList[index].answer === '') {
-      lastOne = index + 1;
-      return lastOne;
-    }
-  }
-}
-
 function sumCorrectAnswers() {
   let updatedAnswerList = Object.values(getQuestionRecord())[0];
-  var sum = 0;
+  let sum = 0;
+  let lastOne = 0;
+  let firstTime = true;
+  let totalUnAnswered = 0;
+
   for (let index = 0; index < updatedAnswerList.length; index++) {
     if (updatedAnswerList[index].answer === quizData.questions[index].correct) {
       sum++;
     }
+    if (updatedAnswerList[index].answer === '') {
+      totalUnAnswered++;
+      if (firstTime) {
+        lastOne = index + 1;
+        firstTime = false;
+      }
+    }
   }
-  console.log(sum);
-  return sum;
+  return [sum, updatedAnswerList.length - totalUnAnswered, lastOne];
 }
 
 // -----Use this method to access up-to-date Question records-----
@@ -77,4 +76,3 @@ const setQuestionRecord = (answer, questionNumber) => {
 export { getQuestionRecord };
 export { setQuestionRecord };
 export { sumCorrectAnswers };
-export { lastQuestion };
