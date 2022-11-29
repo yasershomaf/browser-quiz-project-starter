@@ -11,14 +11,23 @@ import { createStatusElement } from '../views/recordView.js';
 import { quizData } from '../data.js';
 import { getQuestionRecord } from '../questionsRecord.js';
 import { setQuestionRecord } from '../questionsRecord.js';
+import { sumCorrectAnswers } from '../questionsRecord.js';
+import { lastQuestion } from '../questionsRecord.js';
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
   //For status information
-  const currentStatus = getQuestionRecord(); // We use getQuestionRecord function and take values as object.
-  const statusElement = createStatusElement(currentStatus); // Send that object to views for prepared as html element
+  // We use getQuestionRecord function and take values as object.
+  const currentQuestionNumber = quizData.currentQuestionIndex;
+  const lastQuestionHolder = lastQuestion();
+  const sumCorrect = sumCorrectAnswers();
+  const statusElement = createStatusElement(
+    currentQuestionNumber,
+    sumCorrect,
+    lastQuestionHolder
+  ); // Send that object to views for prepared as html element
   userInterface.appendChild(statusElement); // Put that element in page
 
   //For Questions
@@ -64,13 +73,11 @@ export const initQuestionPage = () => {
 //For moving between questions
 const nextQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
-  setQuestionRecord('', quizData.currentQuestionIndex);
   initQuestionPage();
 };
 
 const prevQuestion = () => {
   quizData.currentQuestionIndex = quizData.currentQuestionIndex - 1;
-  setQuestionRecord('', quizData.currentQuestionIndex);
   initQuestionPage();
 };
 
@@ -78,13 +85,12 @@ const prevQuestion = () => {
 function checkAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const answersListElement = this.parentElement.children;
+  setQuestionRecord(this.textContent[5], quizData.currentQuestionIndex);
   if (this.textContent[5] === currentQuestion.correct) {
     // If selected one is correct: make it green and add +1 to correct answers
     this.classList.add('green');
-    setQuestionRecord('correct', quizData.currentQuestionIndex);
   } else {
     this.classList.add('red');
-
     // After wrong option selected this will show right option
     for (const answer of answersListElement) {
       if (answer.textContent[5] === currentQuestion.correct) {

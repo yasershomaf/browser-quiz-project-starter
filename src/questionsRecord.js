@@ -1,3 +1,32 @@
+import { quizData } from './data.js';
+
+let answerList = [];
+for (let index = 0; index < quizData.questions.length; index++) {
+  answerList.push({ questionNumber: index + 1, answer: '' });
+}
+
+function lastQuestion() {
+  let updatedAnswerList = Object.values(getQuestionRecord())[0];
+  var lastOne = 0;
+  for (let index = 0; index < updatedAnswerList.length; index++) {
+    if (updatedAnswerList[index].answer === '') {
+      lastOne = index + 1;
+      return lastOne;
+    }
+  }
+}
+
+function sumCorrectAnswers() {
+  let updatedAnswerList = Object.values(getQuestionRecord())[0];
+  var sum = 0;
+  for (let index = 0; index < updatedAnswerList.length; index++) {
+    if (updatedAnswerList[index].answer === quizData.questions[index].correct) {
+      sum++;
+    }
+  }
+  console.log(sum);
+  return sum;
+}
 
 // -----Use this method to access up-to-date Question records-----
 
@@ -6,15 +35,15 @@
 // then: const randomValue = getQuestionRecord();
 // to reach specific element you should type:  randomValue.currentIndex
 const getQuestionRecord = () => {
+  let updatedAnswerList = answerList;
   let questionRecord = JSON.parse(localStorage.getItem('questionRecord'));
-  if(!questionRecord){
+  if (!questionRecord) {
     questionRecord = {
-      currentIndex : 0,
-      totalCorrectAnswers: 0
-    }
+      answerList: updatedAnswerList,
+    };
   }
   return questionRecord;
-}
+};
 
 //-----Use this method to set question records-----
 
@@ -28,26 +57,24 @@ const getQuestionRecord = () => {
 // First: import { setQuestionRecord } from '../questionsRecord.js';
 // Then: setQuestionRecord('correct', quizData.currentQuestionIndex);
 
-const setQuestionRecord = (status, currentQuestion) => {
-  let correctAnswers = Object.values(getQuestionRecord())[1];
-  switch (status) {
-    case 'reset':
-      correctAnswers = 0;
-      break;
-
-      case 'correct':
-      correctAnswers++;
-      break;
-
-    default:
-      break;
+const setQuestionRecord = (answer, questionNumber) => {
+  const correctAnswer = quizData.questions[questionNumber].correct;
+  let updatedAnswerList = Object.values(getQuestionRecord())[0];
+  if (answer === 'reset') {
+    updatedAnswerList = answerList;
+  } else {
+    updatedAnswerList[questionNumber].answer = answer;
   }
 
-  localStorage.setItem('questionRecord', JSON.stringify({
-      currentIndex: currentQuestion,
-      totalCorrectAnswers: correctAnswers
-    }))
-}
+  localStorage.setItem(
+    'questionRecord',
+    JSON.stringify({
+      answerList: updatedAnswerList,
+    })
+  );
+};
 
-export {getQuestionRecord}
-export {setQuestionRecord}
+export { getQuestionRecord };
+export { setQuestionRecord };
+export { sumCorrectAnswers };
+export { lastQuestion };
