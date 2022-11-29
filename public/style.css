@@ -1,6 +1,9 @@
+
+/* General settings */
 *{margin: 0;
 padding: 0;
 box-sizing: border-box;}
+
 .container {
     display: flex;
     text-align: center;
@@ -14,25 +17,49 @@ box-sizing: border-box;}
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 60%;
   border: solid 5px black;
+  row-gap: 20px;
 }
 
+/* status section */
+.status{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content:space-between;
+}
+
+.status h1{
+ color: red;
+}
+
+/* Questions section */
 .questionElement{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   border: solid 5px green;
+  row-gap: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    width: 320px;
+    width: 80%;
     justify-content: space-between;
     border: solid 5px blue;
 }
 
 .quiz-answer {
-    width: 150px;
+  margin: 1%;
+    width: 48%;
     height: 50px;
     text-align: center;
     background-color: beige;
@@ -51,13 +78,23 @@ ul {
 .red {
     background-color: red;
 }
-/* .status{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content:space-between;
-} */
 
-.status h1{
- color: red;
+/* buttons section */
+.buttonContainer{
+  position: relative;
+  border: solid 2px red;
+  width: 80%;
+}
+
+#dont-know-question-button{
+  margin: auto;
+}
+#next-question-button{
+  position: absolute;
+  right: 5%;
+}
+
+#previous-question-button{
+  position: absolute;
+  left: 5%;
 }
