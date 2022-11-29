@@ -1,10 +1,12 @@
 import { quizData } from './data.js';
 
+//Creating answerList to save in Local Storage
 let answerList = [];
 for (let index = 0; index < quizData.questions.length; index++) {
   answerList.push({ questionNumber: index + 1, answer: '' });
 }
 
+//Accessing answerList with getQuestionRecord() then return required variables
 function sumCorrectAnswers() {
   let updatedAnswerList = Object.values(getQuestionRecord())[0];
   let sum = 0;
@@ -28,7 +30,6 @@ function sumCorrectAnswers() {
 }
 
 // -----Use this method to access up-to-date Question records-----
-
 // -----How to use this in your page-----
 // first: import { getQuestionRecord } from '../questionsRecord.js';
 // then: const randomValue = getQuestionRecord();
@@ -46,15 +47,9 @@ const getQuestionRecord = () => {
 
 //-----Use this method to set question records-----
 
-// it has 2 argument. 1 = status , 2 = currentQuestion
-// status = 'reset' for resetting all correct answers as 0
-// status = 'correct' for increase 1 correct answers
-// status = '' for wrong answers. it does nothing
-// currentQuestion = setting current Question data to Local storage
-
 // -----How to use this in your page-----
 // First: import { setQuestionRecord } from '../questionsRecord.js';
-// Then: setQuestionRecord('correct', quizData.currentQuestionIndex);
+// Then: setQuestionRecord('c', quizData.currentQuestionIndex);
 
 const setQuestionRecord = (answer, questionNumber) => {
   const correctAnswer = quizData.questions[questionNumber].correct;

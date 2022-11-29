@@ -3,15 +3,15 @@
  * @returns {Element}
  */
 export const createStatusElement = (currentQuestion, sumCorrect) => {
-  //Status has up-to-date question status
   const element = document.createElement('div');
   element.classList.add('status');
-  //We put status information into h1 >> into element: which is div, created above
+  //We will put status information(currentQuestion, sumCorrect)>> into element: which is div, created above
+  //sumCorrect has 3 value:  [sum, totalAnsweredQuestions, lastOne]
   element.innerHTML = String.raw`
     <h2>${sumCorrect[0]} / ${sumCorrect[1]}</h2> 
     <h1>${currentQuestion + 1}</h1>
     <h2>time</h2>
-  `; // +1 in the end because index start from 0
+  `; // +1 in the end of -currentQuestion-: because index start from 0
 
   return element;
 };

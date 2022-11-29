@@ -9,7 +9,6 @@ import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { createStatusElement } from '../views/recordView.js';
 import { quizData } from '../data.js';
-import { getQuestionRecord } from '../questionsRecord.js';
 import { setQuestionRecord } from '../questionsRecord.js';
 import { sumCorrectAnswers } from '../questionsRecord.js';
 
@@ -17,14 +16,11 @@ export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
-  //For status information
-  // We use getQuestionRecord function and take values as object.
-  const currentQuestionNumber = quizData.currentQuestionIndex;
-  const sumCorrect = sumCorrectAnswers();
-  const statusElement = createStatusElement(currentQuestionNumber, sumCorrect); // Send that object to views for prepared as html element
-  userInterface.appendChild(statusElement);
-
-  // Put that element in page
+  //This is for creating STATUS information
+  const currentQuestionNumber = quizData.currentQuestionIndex; //To get current question number
+  const sumCorrect = sumCorrectAnswers(); // To get 3 value from sumCorrectAnswers [sum, totalAnsweredQuestions, lastOne]
+  const statusElement = createStatusElement(currentQuestionNumber, sumCorrect); // Send that list to views for prepared as html element
+  userInterface.appendChild(statusElement); // Put that element in page
 
   //For Questions
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
@@ -81,15 +77,15 @@ const prevQuestion = () => {
 function checkAnswer() {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   const answersListElement = this.parentElement.children;
-  setQuestionRecord(this.textContent[5], quizData.currentQuestionIndex);
-
+  setQuestionRecord(this.textContent[5], quizData.currentQuestionIndex); //This will refresh local data with chosen answer
+  //this.textContent[5] getting the 5. char at string which is after 4 blank space: our answer letter
   if (this.textContent[5] === currentQuestion.correct) {
     console.log(this.textContent[2]);
-    // If selected one is correct: make it green and add +1 to correct answers
+    // If selected one is correct: make it green
     this.classList.add('green');
   } else {
     this.classList.add('red');
-    // After wrong option selected this will show right option
+    // if wrong option selected this for function will still show the right answer
     for (const answer of answersListElement) {
       if (answer.textContent[5] === currentQuestion.correct) {
         answer.classList.add('green');
@@ -102,6 +98,9 @@ function checkAnswer() {
     answer.removeEventListener('click', checkAnswer);
   }
   // initQuestionPage();
+  // ^^
+  // This code can refresh the page immediately. But it also refresh the questions and erase their color.
+  // What can be done: While producing question checking if they already answered and give a color with getQuestionRecord method ?? maybe ?? I don't know
 }
 
 function showAnswer() {
