@@ -70,7 +70,7 @@ export const initQuestionPage = () => {
             .addEventListener('click', nextQuestion);
     }
     if (!currentStatus.userAnswers[currentStatus.currentIndex]) {
-        //check that we didn't answer
+        //check that we didn't answers
         document
             .getElementById(DONT_KNOW_QUESTION_BUTTON_ID)
             .addEventListener('click', showAnswer);
