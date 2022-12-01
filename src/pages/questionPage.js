@@ -10,6 +10,7 @@ import {
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
+import { createButtonElement } from '../views/buttonView.js';
 import { quizData } from '../data.js';
 // import { initResultsPage } from './resultsPage.js';
 
@@ -47,10 +48,14 @@ export const initQuestionPage = () => {
   }
 
   //------------- CONTROL BUTTONS -------------------
+  const buttonElement = createButtonElement();
+  userInterface.appendChild(buttonElement);
+
   // ↓↓ Results ↓↓
   const resultsButton = document.getElementById(RESULTS_BUTTON_ID);
   // resultsButton.addEventListener('click', initResultsPage );
   resultsButton.classList.add('hidden'); // Results button is hidden by default
+
   // ↓↓ Next ↓↓
   const nextButton = document.getElementById(NEXT_QUESTION_BUTTON_ID);
   nextButton.addEventListener('click', nextQuestion);
