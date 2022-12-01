@@ -6,13 +6,18 @@
 }
 body{
   height: 100vh;
+  background: url(./bg_n.jpg) no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 5px solid red;
   font-family: 'Nunito', sans-serif;
-  background-color: #F2F3F4;
-  
+  color:#000000;
+}
+h1{
+  font-size: 1.5em;
+  padding-bottom: 1%;
 }
 .centered {
   /* position */
@@ -25,28 +30,37 @@ body{
   height: 60vh;
   /* design */
     text-align: center;
-    border: 5px solid black;
+    background: -webkit-linear-gradient(rgba(59,59,59,0.85) 0%,rgba(0,0,0,0.3) 0%);
+    box-shadow: 0 0 6px 3px rgb(0 0 0 / 50%);
 }
 
 .question-container{
   margin-top: 2%;
   margin-bottom: 2%;
   width: 100%;
-  border: 5px solid black;
 }
 .question-container ul{
+  border-top: 2px solid black;
   margin: auto;
   width: 60%;
   height: 25vh;
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: space-around;
   flex-wrap: wrap;
-  border: 5px solid black;
 }
 .question-container li{
-  
-  width: 49%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 10px;
+  padding-left: 2%;
+  height: 45px;
+  width: 35%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  font-weight:800;
+  color:#000000;
 }
 .button-container{
   position: relative;
@@ -55,7 +69,16 @@ body{
   justify-content: center;
   width: 60%;
   height: 50px;
-  border: 5px solid black;
+  
+}
+
+button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  height: 35px;
+  width: 150px;
 }
 #do-not-know-key{
   margin: auto;
@@ -80,16 +103,17 @@ body{
 }
 
 .correct {
-    background-color: green;
+  box-shadow: rgba(86, 232, 63, 0.1) 0px 1px 0px, rgba(79, 227, 56, 0.1) 0px 8px 24px, rgba(29, 238, 43, 0.1) 0px 16px 48px;
+  border-bottom: 2px solid rgb(18, 182, 26);
 }
 
 .incorrect {
-    background-color: red;
+  border-bottom: 2px solid rgb(182, 56, 18);
 }
 
 .disabled .correct-answer {
-    background-color: green;
-    border: 1px solid black;
+  box-shadow: rgba(86, 232, 63, 0.1) 0px 1px 0px, rgba(79, 227, 56, 0.1) 0px 8px 24px, rgba(29, 238, 43, 0.1) 0px 16px 48px;
+    border-bottom: 2px solid rgb(18, 182, 26);
 }
 .hidden{
     display: none;
