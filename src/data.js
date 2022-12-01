@@ -1,4 +1,4 @@
-import { STORED_DATA } from "./constants.js";
+import { STORED_DATA } from './constants.js';
 
 /* Program Data
 
@@ -11,9 +11,9 @@ import { STORED_DATA } from "./constants.js";
     not by your listeners
 */
 
-const storedData = JSON.parse(localStorage.getItem(STORED_DATA))
+const storedData = JSON.parse(localStorage.getItem(STORED_DATA));
 
- const quizData = {
+const quizData = {
   currentQuestionIndex: 0,
   // the questions in the quiz
   questions: [
@@ -54,8 +54,7 @@ const storedData = JSON.parse(localStorage.getItem(STORED_DATA))
         },
         {
           text: 'MDN',
-          href:
-            'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
+          href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof',
         },
       ],
     },
@@ -63,9 +62,11 @@ const storedData = JSON.parse(localStorage.getItem(STORED_DATA))
   ],
 };
 
-if(storedData){
+// ↓↓ Changing data with localStorage
+if (storedData) {
   quizData.questions.forEach((question, index) => {
-    question.selected = storedData[index]
-  })
+    question.selected = storedData[index];
+  });
 }
-export {quizData}
+
+export { quizData };
