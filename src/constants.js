@@ -11,3 +11,6 @@ export const ANSWERS_LIST_ID = 'answers-list';
 export const NEXT_QUESTION_BUTTON_ID = 'next-question-button';
 export const PREV_QUESTION_BUTTON_ID = 'prev-question-button'
 export const DONT_KNOW_QUESTION_BUTTON_ID = 'dont-know-question-button'
+export const RESULTS_BUTTON_ID = 'results-botton'
+export const DO_NOT_KNOW_KEY = 'do-not-know-key'
+export const STORED_DATA = 'stored-data'

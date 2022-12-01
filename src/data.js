@@ -1,3 +1,5 @@
+import { STORED_DATA } from "./constants.js";
+
 /* Program Data
 
   in this file you can declare variables to store important data for your program
@@ -9,7 +11,9 @@
     not by your listeners
 */
 
-export const quizData = {
+const storedData = JSON.parse(localStorage.getItem(STORED_DATA))
+
+ const quizData = {
   currentQuestionIndex: 0,
   // the questions in the quiz
   questions: [
@@ -58,3 +62,10 @@ export const quizData = {
     // Add more questions here
   ],
 };
+
+if(storedData){
+  quizData.questions.forEach((question, index) => {
+    question.selected = storedData[index]
+  })
+}
+export {quizData}

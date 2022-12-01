@@ -32,3 +32,6 @@ ul {
     background-color: green;
     border: 1px solid black;
 }
+.hidden{
+    display: none;
+}
