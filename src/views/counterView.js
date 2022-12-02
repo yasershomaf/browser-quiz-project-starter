@@ -7,7 +7,7 @@ export const createCounterElement = () => {
     const amountOfCorrectAnswers = quizData.questions.filter(question => question.selected === question.correct).length
 
     element.innerHTML = String.raw `
-      ${amountOfCorrectAnswers} / ${quizData.questions.length};
+      ${amountOfCorrectAnswers} / ${quizData.questions.length}
     `;
     return element;
 };
