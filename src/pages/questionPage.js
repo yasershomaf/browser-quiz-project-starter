@@ -8,7 +8,8 @@ import {
     DO_NOT_KNOW_KEY,
     STORED_DATA,
     COUNTER_ELEMENT,
-    START_GAME
+    START_TIME,
+    USEFUL_LINKS_ID
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -16,8 +17,19 @@ import { quizData } from '../data.js';
 import { createCounterElement } from '../views/counterView.js';
 import { createQuestionNumberElement } from '../views/questionNumberView.js';
 import { createTimerElement } from '../views/timerView.js';
+import { createUsefulLinkElement } from '../views/usefulLink.js'
 // import { initResultsPage } from './resultsPage.js';
+
+let startTime;
+
 export const initQuestionPage = () => {
+    if (!startTime) {
+        startTime = JSON.parse(localStorage.getItem(START_TIME));
+
+        if (!startTime) {
+            startTime = 0;
+        }
+    }
     const userInterface = document.getElementById(USER_INTERFACE_ID);
     userInterface.innerHTML = '';
     const counterElement = createCounterElement();
@@ -26,8 +38,7 @@ export const initQuestionPage = () => {
     userInterface.appendChild(questionNumberElement);
     const timerElement = createTimerElement();
     userInterface.appendChild(timerElement);
-    const timeStart = new Date(JSON.parse(localStorage.getItem(START_GAME)));
-    updateTime(timerElement, timeStart);
+    updateTime(timerElement);
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     const questionElement = createQuestionElement(currentQuestion.text);
@@ -48,6 +59,14 @@ export const initQuestionPage = () => {
             }
         }
     }
+
+    const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
+    usefulLinksElement.classList.add("hidden");
+    currentQuestion.links.forEach(link => {
+        const linkElement = createUsefulLinkElement(link);
+        usefulLinksElement.appendChild(linkElement)
+    });
+
     const resultsButton = document.getElementById(RESULTS_BUTTON_ID)
         // resultsButton.addEventListener('click', initResultsPage );
     resultsButton.classList.add("hidden")
@@ -71,6 +90,7 @@ export const initQuestionPage = () => {
     if (currentQuestion.selected) {
         doNotKnowButton.classList.add("hidden")
         answersListElement.classList.add('disabled');
+        usefulLinksElement.classList.remove("hidden");
     }
 };
 const nextQuestion = () => {
@@ -88,6 +108,9 @@ const setAnswer = () => {
     const doNotKnowButton = document.getElementById(DONT_KNOW_QUESTION_BUTTON_ID)
     doNotKnowButton.classList.add("hidden")
 
+    const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
+    usefulLinksElement.classList.remove("hidden");
+
     localStorage.setItem(STORED_DATA, JSON.stringify(quizData.questions.map(question => question.selected)))
 
 };
@@ -96,10 +119,7 @@ function checkAnswer(answerKey, answerElement) {
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     if (answerKey === currentQuestion.correct) {
-        const amountOfCorrectAnswers = quizData.questions.reduce((sum, question) => {
-            if ('abcd'.includes(question.selected)) return ++sum;
-            else return sum;
-        }, 0);
+        const amountOfCorrectAnswers = quizData.questions.filter(question => question.selected === question.correct).length
         document.getElementById(COUNTER_ELEMENT).textContent = `${amountOfCorrectAnswers +1} / ${quizData.questions.length}`;
 
         answerElement.classList.add('correct');
@@ -117,21 +137,23 @@ const showAnswer = () => {
     setAnswer();
 }
 
-function updateTime(timerElement, timeStart, nextMinute, nextSecond) {
-    // if (nextMinute === 10) { initResultsPage() } // if 10 minutes is gone we'll load final page
-    const timeNow = new Date();
+const updateTime = (timerElement) => {
+    startTime++;
 
-    const minutes = nextMinute || Math.floor((timeNow - timeStart) / 1000 / 60);
-    const seconds = nextSecond || Math.floor((timeNow - timeStart) / 1000 - (minutes * 60));
+    localStorage.setItem(START_TIME, JSON.stringify(startTime));
+
+    if (startTime === 600) { // 600 = 10 (minutes) * 60 (seconds per minute)
+        // initResultsPage();
+
+        return;
+    }
+
+    const minutes = Math.floor(startTime / 60); // 60 (seconds per minute)
+    const seconds = startTime - minutes * 60;
 
     timerElement.textContent = `Time: ${('0' + minutes).slice(-2)} : ${('0' + seconds).slice(-2)}`;
-    if (seconds === 59) {
-        nextMinute = minutes + 1;
-        nextSecond = 0
-    } else {
-        nextSecond = seconds + 1;
-    }
+
     setTimeout(() => {
-        updateTime(timerElement, timeStart, nextMinute, nextSecond);
+        updateTime(timerElement);
     }, 1000);
 }

@@ -1,4 +1,4 @@
-import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID, STORED_DATA, START_GAME } from '../constants.js';
+import { USER_INTERFACE_ID, START_QUIZ_BUTTON_ID } from '../constants.js';
 import { createWelcomeElement } from '../views/welcomeView.js';
 import { initQuestionPage } from './questionPage.js';
 
@@ -15,9 +15,5 @@ export const initWelcomePage = () => {
 };
 
 const startQuiz = () => {
-    const now = new Date();
-    if (!localStorage.getItem(STORED_DATA)) {
-        localStorage.setItem(START_GAME, JSON.stringify(now))
-    };
     initQuestionPage();
 };

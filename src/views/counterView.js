@@ -4,10 +4,7 @@ import { COUNTER_ELEMENT } from "../constants.js";
 export const createCounterElement = () => {
     const element = document.createElement('div');
     element.setAttribute('id', COUNTER_ELEMENT);
-    const amountOfCorrectAnswers = quizData.questions.reduce((sum, question) => {
-        if ('abcd'.includes(question.selected)) return ++sum;
-        else return sum;
-    }, 0);
+    const amountOfCorrectAnswers = quizData.questions.filter(question => question.selected === question.correct).length
 
     element.innerHTML = String.raw `
       ${amountOfCorrectAnswers} / ${quizData.questions.length};
