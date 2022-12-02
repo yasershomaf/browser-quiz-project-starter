@@ -18,17 +18,22 @@ import { createCounterElement } from '../views/counterView.js';
 import { createQuestionNumberElement } from '../views/questionNumberView.js';
 import { createTimerElement } from '../views/timerView.js';
 import { createUsefulLinkElement } from '../views/usefulLink.js'
-// import { initResultsPage } from './resultsPage.js';
+import { initResultsPage } from './resultsPage.js';
 
 let startTime;
+let timer;
 
-export const initQuestionPage = () => {
+export const initQuestionPage = (resetTime) => {
+
     if (!startTime) {
         startTime = JSON.parse(localStorage.getItem(START_TIME));
 
         if (!startTime) {
             startTime = 0;
         }
+    }
+    if(resetTime){
+        startTime = 0;
     }
     const userInterface = document.getElementById(USER_INTERFACE_ID);
     userInterface.innerHTML = '';
@@ -38,7 +43,12 @@ export const initQuestionPage = () => {
     userInterface.appendChild(questionNumberElement);
     const timerElement = createTimerElement();
     userInterface.appendChild(timerElement);
-    updateTime(timerElement);
+    clearTimeout(timer)
+    // if(!timer){
+        timer = setTimeout(() => {
+            updateTime(timerElement);
+        }, 1000);
+    // }
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     const questionElement = createQuestionElement(currentQuestion.text);
@@ -68,7 +78,10 @@ export const initQuestionPage = () => {
     });
 
     const resultsButton = document.getElementById(RESULTS_BUTTON_ID)
-        // resultsButton.addEventListener('click', initResultsPage );
+        resultsButton.addEventListener('click', () =>{
+            clearTimeout(timer)
+            initResultsPage(formatTime(startTime))
+        } );
     resultsButton.classList.add("hidden")
 
 
@@ -127,14 +140,23 @@ function checkAnswer(answerKey, answerElement) {
         answerElement.classList.add('incorrect');
     }
     currentQuestion.selected = answerKey;
+
     setAnswer()
+
 
 }
 const showAnswer = () => {
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     currentQuestion.selected = DO_NOT_KNOW_KEY;
-    setAnswer();
+    setAnswer()
+
+}
+const formatTime = (time) =>{
+    const minutes = Math.floor(time / 60); // 60 (seconds per minute)
+    const seconds = time - minutes * 60;
+    return `${('0' + minutes).slice(-2)} : ${('0' + seconds).slice(-2)}`
+
 }
 
 const updateTime = (timerElement) => {
@@ -142,18 +164,20 @@ const updateTime = (timerElement) => {
 
     localStorage.setItem(START_TIME, JSON.stringify(startTime));
 
+    const formattedTime = formatTime(startTime)
+
     if (startTime === 600) { // 600 = 10 (minutes) * 60 (seconds per minute)
-        // initResultsPage();
+        clearTimeout(timer)
+        initResultsPage(formattedTime);
 
         return;
     }
 
-    const minutes = Math.floor(startTime / 60); // 60 (seconds per minute)
-    const seconds = startTime - minutes * 60;
+    
 
-    timerElement.textContent = `Time: ${('0' + minutes).slice(-2)} : ${('0' + seconds).slice(-2)}`;
+    timerElement.textContent = `Time: ${formattedTime}`;
 
-    setTimeout(() => {
+    timer = setTimeout(() => {
         updateTime(timerElement);
     }, 1000);
 }
