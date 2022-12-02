@@ -128,12 +128,15 @@ function checkAnswer(answerKey, answerElement) {
     }
     currentQuestion.selected = answerKey;
 
+    setAnswer()
+
 
 }
 const showAnswer = () => {
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     currentQuestion.selected = DO_NOT_KNOW_KEY;
+    setAnswer()
 
 }
 
