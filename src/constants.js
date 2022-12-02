@@ -16,3 +16,4 @@ export const DO_NOT_KNOW_KEY = 'do-not-know-key';
 export const STORED_DATA = 'stored-data';
 export const QUESTION_CONTAINER_CLASS = 'question-container';
 export const BUTTON_CONTAINER_CLASS = 'button-container';
+export const WELCOME_PAGE_CLASS = 'welcome-page';

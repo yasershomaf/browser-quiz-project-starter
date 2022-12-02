@@ -21,7 +21,7 @@ const quizData = {
     {
       text: 'What are the different ways to declare a JS variable?',
       answers: {
-        a: 'constant, let, variable',
+        a: 'constant, let, variablea',
         b: 'var, const, let, function',
         c: 'var, let, const',
         d: 'var, const, let, function',

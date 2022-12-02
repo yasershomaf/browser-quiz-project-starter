@@ -15,13 +15,13 @@ export const createButtonElement = () => {
   // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
   <button id="${PREV_QUESTION_BUTTON_ID}">
-    Previous question
+    <<
   </button>
   <button id="${DONT_KNOW_QUESTION_BUTTON_ID}">
-    I don't know
+    ?
   </button>
   <button id="${NEXT_QUESTION_BUTTON_ID}">
-    Next question
+    >>
   </button>
   <button id="${RESULTS_BUTTON_ID}">
     Results
