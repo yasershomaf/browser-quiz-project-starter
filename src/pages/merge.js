@@ -7,49 +7,17 @@ import {
   USER_INTERFACE_ID,
   DO_NOT_KNOW_KEY,
   STORED_DATA,
-  COUNTER_ELEMENT,
-  START_TIME,
-  USEFUL_LINKS_ID,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
 import { createButtonElement } from '../views/buttonView.js';
 import { quizData } from '../data.js';
-import { createCounterElement } from '../views/counterView.js';
-import { createQuestionNumberElement } from '../views/questionNumberView.js';
-import { createTimerElement } from '../views/timerView.js';
-import { createUsefulLinkElement } from '../views/usefulLinksView.js';
-import { initResultsPage } from './resultsPage.js';
-
-let startTime;
-let timer;
+// import { initResultsPage } from './resultsPage.js';
 
 //------------- CREATING PAGE -------------------
-export const initQuestionPage = (resetTime) => {
-  if (!startTime) {
-    startTime = JSON.parse(localStorage.getItem(START_TIME));
-
-    if (!startTime) {
-      startTime = 0;
-    }
-  }
-  if (resetTime) {
-    startTime = 0;
-  }
-  // Reset html
+export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
-
-  const counterElement = createCounterElement();
-  userInterface.appendChild(counterElement);
-  const questionNumberElement = createQuestionNumberElement();
-  userInterface.appendChild(questionNumberElement);
-  const timerElement = createTimerElement();
-  userInterface.appendChild(timerElement);
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    updateTime(timerElement);
-  }, 1000);
 
   // Getting Questions & Answers & Buttons and printing in page
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
@@ -83,19 +51,9 @@ export const initQuestionPage = (resetTime) => {
   const buttonElement = createButtonElement();
   userInterface.appendChild(buttonElement);
 
-  const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
-  usefulLinksElement.classList.add('hidden');
-  currentQuestion.links.forEach((link) => {
-    const linkElement = createUsefulLinkElement(link);
-    usefulLinksElement.appendChild(linkElement);
-  });
-
   // ↓↓ Results ↓↓
   const resultsButton = document.getElementById(RESULTS_BUTTON_ID);
-  resultsButton.addEventListener('click', () => {
-    clearTimeout(timer);
-    initResultsPage(formatTime(startTime));
-  });
+  // resultsButton.addEventListener('click', initResultsPage );
   resultsButton.classList.add('hidden'); // Results button is hidden by default
 
   // ↓↓ Next ↓↓
@@ -117,7 +75,6 @@ export const initQuestionPage = (resetTime) => {
   if (currentQuestion.selected) {
     doNotKnowButton.classList.add('hidden');
     answersListElement.classList.add('disabled'); //← ← This class has trick on CSS. If we have it: all button list will be unable to click
-    usefulLinksElement.classList.remove('hidden');
   }
 };
 
@@ -139,8 +96,6 @@ const setAnswer = () => {
   const doNotKnowButton = document.getElementById(DONT_KNOW_QUESTION_BUTTON_ID);
   doNotKnowButton.classList.add('hidden');
 
-  const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
-  usefulLinksElement.classList.remove('hidden');
   // ↓↓ If User change -question.selected- this will put it on local storage
   localStorage.setItem(
     STORED_DATA,
@@ -151,13 +106,6 @@ const setAnswer = () => {
 function checkAnswer(answerKey, answerElement) {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   if (answerKey === currentQuestion.correct) {
-    const amountOfCorrectAnswers = quizData.questions.filter(
-      (question) => question.selected === question.correct
-    ).length;
-    document.getElementById(COUNTER_ELEMENT).textContent = `${
-      amountOfCorrectAnswers + 1
-    } / ${quizData.questions.length}`;
-
     answerElement.classList.add('correct');
   } else {
     answerElement.classList.add('incorrect');
@@ -165,32 +113,9 @@ function checkAnswer(answerKey, answerElement) {
   currentQuestion.selected = answerKey;
   setAnswer();
 }
+
 const showAnswer = () => {
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
   currentQuestion.selected = DO_NOT_KNOW_KEY; // ← ← Selected question marked as do-not-know-key
   setAnswer();
-};
-
-const formatTime = (time) => {
-  const minutes = Math.floor(time / 60); // 60 (seconds per minute)
-  const seconds = time - minutes * 60;
-  return `${('0' + minutes).slice(-2)} : ${('0' + seconds).slice(-2)}`;
-};
-
-const updateTime = (timerElement) => {
-  startTime++;
-  localStorage.setItem(START_TIME, JSON.stringify(startTime));
-  const formattedTime = formatTime(startTime);
-
-  if (startTime === 600) {
-    // 600 = 10 (minutes) * 60 (seconds per minute)
-    clearTimeout(timer);
-    initResultsPage(formattedTime);
-    return;
-  }
-  timerElement.textContent = `Time: ${formattedTime}`;
-
-  timer = setTimeout(() => {
-    updateTime(timerElement);
-  }, 1000);
 };
