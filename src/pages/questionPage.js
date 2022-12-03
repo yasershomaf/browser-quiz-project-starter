@@ -83,8 +83,10 @@ export const initQuestionPage = (resetTime) => {
   const buttonElement = createButtonElement();
   userInterface.appendChild(buttonElement);
 
+  //------------- Useful Links -------------------
   const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
   usefulLinksElement.classList.add('hidden');
+  console.log(usefulLinksElement);
   currentQuestion.links.forEach((link) => {
     const linkElement = createUsefulLinkElement(link);
     usefulLinksElement.appendChild(linkElement);
@@ -119,6 +121,7 @@ export const initQuestionPage = (resetTime) => {
     answersListElement.classList.add('disabled'); //← ← This class has trick on CSS. If we have it: all button list will be unable to click
     usefulLinksElement.classList.remove('hidden');
   }
+  console.log(usefulLinksElement);
 };
 
 //------------- BUTTON FUNCTIONS -------------------
