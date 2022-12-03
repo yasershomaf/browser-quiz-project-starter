@@ -1,37 +1,172 @@
+/* ----------- General Settings ----------- */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  /* position */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* size */
+  height: 100vh;
+  /* design */
+  font-family: 'Nunito', sans-serif;
+  color:#000000;
+  background: url(./bg_n.jpg) no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 .centered {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+  /* position */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* size */
+  width: 60%;
+  height: 60vh;
+  /* design */
+  text-align: center;
+  background: -webkit-linear-gradient(rgba(59,59,59,0.85) 0%,rgba(0,0,0,0.3) 0%);
+  box-shadow: 0 0 6px 3px rgb(0 0 0 / 50%);
+}
+/* ----------- Welcome Page ----------- */
+.welcome-page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.welcome-page h1{
+  margin: 30%;
 }
 
-.scrollable {
-    height: auto;
-    max-height: 80vh;
-    overflow: auto;
+/* ----------- Questions And Answers ----------- */
+.question-container{
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+.question-container h1{
+  padding-bottom: 1%;
+  border-bottom: 3px solid rgba(163, 163, 163, 0.286);
+  font-size: 1.5em;
+}
+.question-container ul{
+  /* position */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin: auto;
+  /* size */
+  margin-top: 3%;
+  margin-bottom: 3%;
+  width: 75%;
+  /* design */
+  list-style: none;
+}
+/*Question Buttons*/
+.question-container li{
+  /* position */
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-left: 2%;
+  /* size */
+  width: 35%;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  margin-top: 1.5%;
+  margin-bottom: 1.5%;
+  /* design */
+  user-select: none;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  font-weight:800;
+  color:#000000;
+  border-bottom: 2px solid rgb(34, 156, 40, 0);
+}
+.question-container li:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 1.5px, rgba(63, 108, 232, 0.1) 0px 1px 0px, rgba(56, 96, 227, 0.1) 0px 8px 24px, rgba(43, 29, 238, 0.1) 0px 16px 48px;
+}
+.question-container:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-ul {
-    list-style: none;
+/* ----------- Buttons ----------- */
+.button-container{
+  /* position */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* size */
+  width: 50%;
+  height: 50px;
+}
+button{
+  /* position */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* size */
+  height: 35px;
+  padding-left: 1em;
+  padding-right: 1em;
+  /* design */
+  font-family: 'Nunito', sans-serif;
+  font-weight:800;
+  color:#151515;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 10px;
+  background-color: #cacaca;
+  border: 2px solid rgba(28, 28, 28, 0.66);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+button:hover{
+  background-color: #e1e1e1;
+  
+}
+#do-not-know-key{
+  margin: auto;
+}
+#next-question-button,#results-button{
+  position: absolute;
+  right: 2%;
+}
+#prev-question-button{
+  position: absolute;
+  left: 2%;
+}
+.button-container:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-.disabled {
-    pointer-events: none;
-}
 
-.correct {
-    background-color: green;
+/* Function Classes */
+.question-container .incorrect {
+  box-shadow:rgba(0, 0, 0, 0.15) 1px 1px 1.5px, rgba(232, 94, 63, 0.2) 0px 1px 0px, rgba(227, 87, 56, 0.2) 0px 8px 24px, rgba(238, 39, 29, 0.2) 0px 16px 48px;
+  border-bottom: 2px solid rgb(182, 56, 18);
+  transition: .3s;
 }
-
-.incorrect {
-    background-color: red;
-}
-
-.disabled .correct-answer {
-    background-color: green;
-    border: 1px solid black;
+.disabled .correct-answer,.correct {
+ 
+  box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 1.5px, rgba(86, 232, 63, 0.2) 0px 1px 0px, rgba(79, 227, 56, 0.2) 0px 8px 24px, rgba(29, 238, 43, 0.2) 0px 16px 48px;
+  border-bottom: 2px solid rgb(34, 156, 40);
+  transition: .3s;
 }
 .hidden{
-    display: none;
+  display: none;
+}
+.disabled {
+  pointer-events: none;
 }
