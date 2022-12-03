@@ -10,6 +10,7 @@ import {
   COUNTER_ELEMENT,
   START_TIME,
   USEFUL_LINKS_ID,
+  STATUS_DIV,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -18,7 +19,7 @@ import { quizData } from '../data.js';
 import { createCounterElement } from '../views/counterView.js';
 import { createQuestionNumberElement } from '../views/questionNumberView.js';
 import { createTimerElement } from '../views/timerView.js';
-import { createUsefulLinkElement } from '../views/usefulLinksView.js';
+import { createUsefulLinkElement } from '../views/usefulLink.js';
 import { initResultsPage } from './resultsPage.js';
 
 let startTime;
@@ -40,12 +41,18 @@ export const initQuestionPage = (resetTime) => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
 
+  // Status Elements
+  const statusDiv = document.createElement('div');
+  statusDiv.classList.add(STATUS_DIV);
+  userInterface.appendChild(statusDiv);
+
   const counterElement = createCounterElement();
-  userInterface.appendChild(counterElement);
+  statusDiv.appendChild(counterElement);
   const questionNumberElement = createQuestionNumberElement();
-  userInterface.appendChild(questionNumberElement);
+  statusDiv.appendChild(questionNumberElement);
   const timerElement = createTimerElement();
-  userInterface.appendChild(timerElement);
+  statusDiv.appendChild(timerElement);
+
   clearTimeout(timer);
   timer = setTimeout(() => {
     updateTime(timerElement);
@@ -86,7 +93,6 @@ export const initQuestionPage = (resetTime) => {
   //------------- Useful Links -------------------
   const usefulLinksElement = document.getElementById(USEFUL_LINKS_ID);
   usefulLinksElement.classList.add('hidden');
-  console.log(usefulLinksElement);
   currentQuestion.links.forEach((link) => {
     const linkElement = createUsefulLinkElement(link);
     usefulLinksElement.appendChild(linkElement);
@@ -121,7 +127,6 @@ export const initQuestionPage = (resetTime) => {
     answersListElement.classList.add('disabled'); //← ← This class has trick on CSS. If we have it: all button list will be unable to click
     usefulLinksElement.classList.remove('hidden');
   }
-  console.log(usefulLinksElement);
 };
 
 //------------- BUTTON FUNCTIONS -------------------

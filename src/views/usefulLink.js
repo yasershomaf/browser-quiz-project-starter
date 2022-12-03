@@ -1,8 +1,7 @@
 export const createUsefulLinkElement = (link) => {
   const element = document.createElement('li');
   element.innerHTML = String.raw`
-      <a href=${link.href}>${link.text}</a>
+      <a href=${link.href} target="_blank">${link.text}</a>
     `;
-  console.log(element);
   return element;
 };

@@ -20,3 +20,7 @@ export const START_TIME = 'start-time';
 export const QUESTION_CONTAINER_CLASS = 'question-container';
 export const BUTTON_CONTAINER_CLASS = 'button-container';
 export const WELCOME_PAGE_CLASS = 'welcome-page';
+export const STATUS_DIV = 'status-div';
+export const TIME_ID = 'time-id';
+export const QUESTION_NUMBER_ID = 'question-number-id';
+export const FINAL_PAGE_DIV = 'final-page-id';

@@ -15,7 +15,7 @@ export const createQuestionElement = (question) => {
   <h1>${question}</h1>
   <ul id="${ANSWERS_LIST_ID}">
   </ul>
-  <ul id="${USEFUL_LINKS_ID}">
+  <ul id="${USEFUL_LINKS_ID}">To know more: 
   </ul>
 `;
 
