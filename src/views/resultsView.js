@@ -1,12 +1,15 @@
-import { START_QUIZ_BUTTON_ID } from '../constants.js';
+import { START_QUIZ_BUTTON_ID, FINAL_PAGE_DIV } from '../constants.js';
 
-export const createResults = ( )=> {
+export const createResults = () => {
     const element = document.createElement('div');
-    element.innerHTML = String.raw`
+    element.setAttribute('id', FINAL_PAGE_DIV);
+    element.innerHTML = String.raw `
+    <div class="firework"></div>
+    <div class="firework"></div>
+    <div class="firework"></div>
     <h1>You are finished</h1>
     <button id="${START_QUIZ_BUTTON_ID}">Restart The Quiz</button>
     
-    `
-    return element
-
-}
+    `;
+    return element;
+};
